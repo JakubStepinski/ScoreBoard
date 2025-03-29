@@ -20,6 +20,7 @@ interface IScoreBoardState {
     currentMatches: IMatch[];
     editCurrentMatch: (homeScore: IMatch['homeScore'], awayScore: IMatch['awayScore'], id: IMatch['id']) => void;
     nextIdToAssign: number;
+    removeCurrentMatch: (id: IMatch['id']) => void;
 }
 
 export const createScoreBoardStore = (initialMatches: IMatch[] = []) => {
@@ -32,7 +33,7 @@ export const createScoreBoardStore = (initialMatches: IMatch[] = []) => {
                     createNewMatch({ homeTeam, awayTeam, creationDate, id: state.nextIdToAssign }),
                 ],
                 nextIdToAssign: state.nextIdToAssign + 1,
-            }))
+            }));
         },
         editCurrentMatch: (homeScore, awayScore, id) => {
             set(state => ({
@@ -41,7 +42,12 @@ export const createScoreBoardStore = (initialMatches: IMatch[] = []) => {
                     homeScore,
                     awayScore,
                 }): currentMatch),
-            }))
-        }
+            }));
+        },
+        removeCurrentMatch: (id) => {
+            set(state => ({
+                currentMatches: state.currentMatches.filter(currentMatch => currentMatch.id !== id),
+            }));
+        },
     })));
 }

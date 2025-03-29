@@ -74,8 +74,17 @@ describe('Score Board', () => {
                 awayScore: 4,
             },
             initialMatches[1],
-        ])
+        ]);
     });
-    test('finish match in progress and remove it from scoreboard', () => {});
+    test('finish match in progress and remove it from scoreboard', () => {
+        const initialMatches: IMatch[] = [...mockedMatches];
+        const scoreBoard = createScoreBoardStore(initialMatches);
+
+        scoreBoard.getState().removeCurrentMatch(0);
+        
+        expect(scoreBoard.getState().currentMatches).toEqual([
+            initialMatches[1],
+        ]);
+    });
     test('get summary of matches in progress, ordered by total goals then by latest creation date', () => {});
-})
+});
