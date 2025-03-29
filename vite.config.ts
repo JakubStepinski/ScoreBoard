@@ -30,7 +30,7 @@ export default defineConfig({
         },
     },
     test: {
-        include: ['src/*.{test,spec}.?(c|m)[jt]s?(x)'],
+        include: ['src/**/*.{test,spec}.?(c|m)[jt]s?(x)'],
         setupFiles: ["./setup-tests.ts"],
         globals: true,
         environment: "happy-dom",
