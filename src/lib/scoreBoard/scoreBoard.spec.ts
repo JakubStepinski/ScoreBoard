@@ -2,14 +2,24 @@ import { describe, expect, test } from "vitest";
 import { IMatch } from "./types";
 import { createScoreBoardStore } from "./scoreBoard";
 
-const mockedMatch = {
-    awayTeam: 'TEAM_B',
-    awayScore: 0,
-    creationDate: '2025-03-29T16:13:24.076Z',
-    homeScore: 0,
-    homeTeam: 'TEAM_A',
-    id: 0,
-};
+const mockedMatches = [
+    {
+        awayTeam: 'TEAM_B',
+        awayScore: 0,
+        creationDate: '2025-03-29T16:13:24.076Z',
+        homeScore: 0,
+        homeTeam: 'TEAM_A',
+        id: 0,
+    },
+    {
+        awayTeam: 'TEAM_C',
+        awayScore: 0,
+        creationDate: '2025-03-29T16:15:24.076Z',
+        homeScore: 0,
+        homeTeam: 'TEAM_D',
+        id: 1,
+    },
+];
 
 describe('Score Board', () => {
     test('store is initialized', () => {
@@ -33,7 +43,7 @@ describe('Score Board', () => {
         }]);
     });
     test('new match is created and added to the scoreboard as second match', () => {
-        const initialMatches: IMatch[] = [mockedMatch];
+        const initialMatches: IMatch[] = [mockedMatches[0]];
         const scoreBoard = createScoreBoardStore(initialMatches);
         const creationDate = new Date().toISOString();
 
@@ -51,7 +61,21 @@ describe('Score Board', () => {
             },
         ]);
     });
-    test('match result is updated', () => {});
+    test('match result is updated', () => {
+        const initialMatches: IMatch[] = [...mockedMatches];
+        const scoreBoard = createScoreBoardStore(initialMatches);
+
+        scoreBoard.getState().editCurrentMatch(3, 4, 0);
+
+        expect(scoreBoard.getState().currentMatches).toEqual([
+            {
+                ...initialMatches[0],
+                homeScore: 3,
+                awayScore: 4,
+            },
+            initialMatches[1],
+        ])
+    });
     test('finish match in progress and remove it from scoreboard', () => {});
     test('get summary of matches in progress, ordered by total goals then by latest creation date', () => {});
 })
