@@ -1,21 +1,21 @@
 import { describe, expect, test } from "vitest";
 import { IMatch } from "./types";
-import { createScoreBoardStore } from "./scoreBoard";
+import { createScoreBoardStore } from "./scoreBoardStore";
 import { mockedExpectedMatchesForSummary, mockedMatches, mockedMatchesForSummary } from "./mocks";
 
 describe('Score Board', () => {
     test('store is initialized', () => {
-        const scoreBoard = createScoreBoardStore();
+        const scoreBoardStore = createScoreBoardStore();
 
-        expect(scoreBoard.getState().currentMatches).toEqual([]);
+        expect(scoreBoardStore.getState().currentMatches).toEqual([]);
     });
-    test('new match is created and added to the scoreboard', () => {
-        const scoreBoard = createScoreBoardStore();
+    test('new match is created and added to current matches', () => {
+        const scoreBoardStore = createScoreBoardStore();
         const creationDate = new Date().toISOString();
 
-        scoreBoard.getState().addNewMatch('TEAM_A', 'TEAM_B', creationDate);
+        scoreBoardStore.getState().addNewMatch('TEAM_A', 'TEAM_B', creationDate);
 
-        expect(scoreBoard.getState().currentMatches).toEqual([{
+        expect(scoreBoardStore.getState().currentMatches).toEqual([{
             awayTeam: 'TEAM_B',
             awayScore: 0,
             creationDate,
@@ -24,14 +24,14 @@ describe('Score Board', () => {
             id: 0,
         }]);
     });
-    test('new match is created and added to the scoreboard as second match', () => {
+    test('new match is created and added to current matches as second match', () => {
         const initialMatches: IMatch[] = [mockedMatches[0]];
-        const scoreBoard = createScoreBoardStore(initialMatches);
+        const scoreBoardStore = createScoreBoardStore(initialMatches);
         const creationDate = new Date().toISOString();
 
-        scoreBoard.getState().addNewMatch('TEAM_C', 'TEAM_D', creationDate);
+        scoreBoardStore.getState().addNewMatch('TEAM_C', 'TEAM_D', creationDate);
 
-        expect(scoreBoard.getState().currentMatches).toEqual([
+        expect(scoreBoardStore.getState().currentMatches).toEqual([
             initialMatches[0],
             {
                 awayTeam: 'TEAM_D',
@@ -45,11 +45,11 @@ describe('Score Board', () => {
     });
     test('match result is updated', () => {
         const initialMatches: IMatch[] = [...mockedMatches];
-        const scoreBoard = createScoreBoardStore(initialMatches);
+        const scoreBoardStore = createScoreBoardStore(initialMatches);
 
-        scoreBoard.getState().editCurrentMatch(3, 4, 0);
+        scoreBoardStore.getState().editCurrentMatch(3, 4, 0);
 
-        expect(scoreBoard.getState().currentMatches).toEqual([
+        expect(scoreBoardStore.getState().currentMatches).toEqual([
             {
                 ...initialMatches[0],
                 homeScore: 3,
@@ -58,21 +58,21 @@ describe('Score Board', () => {
             initialMatches[1],
         ]);
     });
-    test('finish match in progress and remove it from scoreboard', () => {
+    test('finish match in progress and remove it from current matches', () => {
         const initialMatches: IMatch[] = [...mockedMatches];
-        const scoreBoard = createScoreBoardStore(initialMatches);
+        const scoreBoardStore = createScoreBoardStore(initialMatches);
 
-        scoreBoard.getState().removeCurrentMatch(0);
+        scoreBoardStore.getState().removeCurrentMatch(0);
         
-        expect(scoreBoard.getState().currentMatches).toEqual([
+        expect(scoreBoardStore.getState().currentMatches).toEqual([
             initialMatches[1],
         ]);
     });
     test('get summary of matches in progress, ordered by total goals respecting latest creation date', () => {
         const initialMatches: IMatch[] = [...mockedMatchesForSummary];
-        const scoreBoard = createScoreBoardStore(initialMatches);
+        const scoreBoardStore = createScoreBoardStore(initialMatches);
 
-        const summary = scoreBoard.getState().getCurrentMatchesSummary();
+        const summary = scoreBoardStore.getState().getCurrentMatchesSummary();
 
         expect(summary).toEqual(mockedExpectedMatchesForSummary);
     });
