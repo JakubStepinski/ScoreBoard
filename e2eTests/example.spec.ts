@@ -1,8 +1,11 @@
 import { test, expect } from '@playwright/test';
 
-test('has button', async ({ page }) => {
-  await page.goto('/');
+test.describe('Score Board', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('/');
+  });
 
-  await expect(page.getByRole('button', { name: 'text' })).toBeVisible();
+  test('renders score board', async ({ page }) => {
+    await expect(page.getByTestId('score-board')).toBeVisible();
+  });
 });
-

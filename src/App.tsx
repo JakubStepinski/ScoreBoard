@@ -1,11 +1,11 @@
 import type {FC} from 'react';
 
 import './index.css';
-import { Button } from './lib';
+import { ScoreBoard } from './lib/ScoreBoard';
 
 const App: FC = () => {
     return (
-        <div><Button>text</Button></div>
+        <ScoreBoard />
     );
 };
 
