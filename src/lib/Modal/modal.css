@@ -1,0 +1,32 @@
+.modal-background {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(34, 30, 30, 0.46);
+}
+.modal-window {
+  background-color: white;
+  border-radius: 8px;
+  min-width: 600px;
+  min-height: 300px;
+}
+.modal-content {
+  padding: 16px;
+}
+.modal-header {
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+.modal-header-close-button {
+  position: absolute;
+  right: 0;
+  padding: 0 24px;
+  cursor: pointer;
+}

@@ -15,7 +15,7 @@ test.describe('Score Board', () => {
 
     await createNewMatchButton.click();
 
-    const createNewMatchDialog = page.getByRole("dialog");
+    const createNewMatchDialog = page.getByTestId("score-board-create-new-match-modal");
     await expect(createNewMatchDialog).toBeVisible();
 
     await createNewMatchDialog.getByPlaceholder("Home team").fill('Barcelona');
