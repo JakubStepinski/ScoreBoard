@@ -1,25 +1,7 @@
 import { describe, expect, test } from "vitest";
 import { IMatch } from "./types";
 import { createScoreBoardStore } from "./scoreBoard";
-
-const mockedMatches = [
-    {
-        awayTeam: 'TEAM_B',
-        awayScore: 0,
-        creationDate: '2025-03-29T16:13:24.076Z',
-        homeScore: 0,
-        homeTeam: 'TEAM_A',
-        id: 0,
-    },
-    {
-        awayTeam: 'TEAM_C',
-        awayScore: 0,
-        creationDate: '2025-03-29T16:15:24.076Z',
-        homeScore: 0,
-        homeTeam: 'TEAM_D',
-        id: 1,
-    },
-];
+import { mockedExpectedMatchesForSummary, mockedMatches, mockedMatchesForSummary } from "./mocks";
 
 describe('Score Board', () => {
     test('store is initialized', () => {
@@ -86,5 +68,12 @@ describe('Score Board', () => {
             initialMatches[1],
         ]);
     });
-    test('get summary of matches in progress, ordered by total goals then by latest creation date', () => {});
+    test('get summary of matches in progress, ordered by total goals respecting latest creation date', () => {
+        const initialMatches: IMatch[] = [...mockedMatchesForSummary];
+        const scoreBoard = createScoreBoardStore(initialMatches);
+
+        const summary = scoreBoard.getState().getCurrentMatchesSummary();
+
+        expect(summary).toEqual(mockedExpectedMatchesForSummary);
+    });
 });
