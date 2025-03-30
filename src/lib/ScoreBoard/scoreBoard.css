@@ -1,0 +1,12 @@
+.score-board {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  min-width: 400px;
+  max-width: 800px;
+  min-height: 300px;
+  border: 1px solid grey;
+  padding: 16px;
+  border-radius: 4px;
+}
