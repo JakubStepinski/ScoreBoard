@@ -1,14 +1,13 @@
 .score-board-match {
   max-width: 600px;
-  width: 100%;
+  border: 1px solid lightgrey;
+  padding: 16px;
 }
 
 .score-board-match-info {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border: 1px solid lightgrey;
-  padding: 16px;
   border-radius: 6px;
 }
 
@@ -24,4 +23,10 @@
 .score-board-match-result {
   font-size: 20px;
   margin: 16px;
+}
+
+.score-board-match-actions {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 16px;
 }

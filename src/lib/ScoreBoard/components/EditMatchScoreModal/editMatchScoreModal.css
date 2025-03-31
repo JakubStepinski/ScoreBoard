@@ -1,10 +1,10 @@
-.score-board-create-new-match-modal {
+.score-board-edit-match-score-modal {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
 }
 
-.score-board-create-new-match-modal-inputs {
+.score-board-edit-match-score-modal-inputs {
   display: flex;
   justify-content: space-between;
   font-size: 16px;

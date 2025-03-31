@@ -4,11 +4,15 @@ import { ScoreBoardStoreProvider, useScoreBoardStore } from '../scoreBoardStore/
 import { Matches } from './components/Matches/Matches';
 import './scoreBoard.css';
 import { CreateNewMatchModal } from './components/CreateNewMatchModal/CreateNewMatchModal';
+import { EditMatchScoreModal } from './components/EditMatchScoreModal/EditMatchScoreModal';
+import { IMatch } from '../scoreBoardStore/types';
 
 const ScoreBoardContent = () => {
     const currentMatches = useScoreBoardStore((state) => state.currentMatches);
     const addNewMatch = useScoreBoardStore((state) => state.addNewMatch);
+    const editCurrentMatch = useScoreBoardStore((state) => state.editCurrentMatch);
     const [isCreateNewMatchModalOpen, setIsCreateJNewMatchModalOpen] = useState(false);
+    const [matchToEdit, setMatchToEdit] = useState<IMatch | null>(null);
 
     return (
         <>
@@ -17,7 +21,7 @@ const ScoreBoardContent = () => {
                 <div className="score-board-actions">
                     <Button onClick={() => setIsCreateJNewMatchModalOpen(true)}>Create new match</Button>
                 </div>
-                <Matches matches={currentMatches} />
+                <Matches matches={currentMatches} setMatchtoEdit={setMatchToEdit} />
             </div>
             {isCreateNewMatchModalOpen && (
                 <CreateNewMatchModal
@@ -26,6 +30,17 @@ const ScoreBoardContent = () => {
                     onCreateNewMatch={(homeTeam, awayTeam, timestamp) => {
                         addNewMatch(homeTeam, awayTeam, timestamp);
                         setIsCreateJNewMatchModalOpen(false);
+                    }}
+                />
+            )}
+            {matchToEdit && (
+                <EditMatchScoreModal
+                    isOpen
+                    match={matchToEdit}
+                    onClose={() => setMatchToEdit(null)}
+                    onEditScore={(homeScore, awayScore, id) => {
+                        editCurrentMatch(homeScore, awayScore, id);
+                        setMatchToEdit(null);
                     }}
                 />
             )}

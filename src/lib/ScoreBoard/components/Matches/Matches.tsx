@@ -4,13 +4,14 @@ import './matches.css';
 
 interface IMatches {
     matches: IMatch[];
+    setMatchtoEdit: (match: IMatch) => void;
 }
 
-export const Matches = ({ matches }: IMatches) => {
+export const Matches = ({ matches, setMatchtoEdit }: IMatches) => {
     return (
         <div className="score-board-matches">
             {matches.map(match => (
-                <CurrentMatch {...match} />
+                <CurrentMatch key={match.id} {...match} onMatchEdit={() => setMatchtoEdit(match)} />
             ))}
         </div>
     );
