@@ -6,14 +6,17 @@ import './scoreBoard.css';
 import { CreateNewMatchModal } from './components/CreateNewMatchModal/CreateNewMatchModal';
 import { EditMatchScoreModal } from './components/EditMatchScoreModal/EditMatchScoreModal';
 import { IMatch } from '../scoreBoardStore/types';
+import { SummaryModal } from './components/SummaryModal/SummaryModal';
 
 const ScoreBoardContent = () => {
     const currentMatches = useScoreBoardStore((state) => state.currentMatches);
     const addNewMatch = useScoreBoardStore((state) => state.addNewMatch);
     const editCurrentMatch = useScoreBoardStore((state) => state.editCurrentMatch);
     const removeCurrentMatch = useScoreBoardStore((state) => state.removeCurrentMatch);
+    const getCurrentMatchesSummary = useScoreBoardStore((state) => state.getCurrentMatchesSummary);
     const [isCreateNewMatchModalOpen, setIsCreateJNewMatchModalOpen] = useState(false);
     const [matchToEdit, setMatchToEdit] = useState<IMatch | null>(null);
+    const [isSummaryModalOpen, setIsSummaryModalOpen] = useState(false);
 
     return (
         <>
@@ -21,6 +24,7 @@ const ScoreBoardContent = () => {
                 <h1>Score Board</h1>
                 <div className="score-board-actions">
                     <Button onClick={() => setIsCreateJNewMatchModalOpen(true)}>Create new match</Button>
+                    <Button onClick={() => setIsSummaryModalOpen(true)}>Generate summary</Button>
                 </div>
                 <Matches matches={currentMatches} setMatchtoEdit={setMatchToEdit} removeMatch={removeCurrentMatch} />
             </div>
@@ -44,6 +48,9 @@ const ScoreBoardContent = () => {
                         setMatchToEdit(null);
                     }}
                 />
+            )}
+            {isSummaryModalOpen && (
+                <SummaryModal isOpen generateSummary={getCurrentMatchesSummary} onClose={() => setIsSummaryModalOpen(false)} />
             )}
         </>
     )

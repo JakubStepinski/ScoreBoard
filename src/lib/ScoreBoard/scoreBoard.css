@@ -10,3 +10,6 @@
   padding: 16px;
   border-radius: 4px;
 }
+.score-board-actions button {
+  margin: 0 16px;
+}
