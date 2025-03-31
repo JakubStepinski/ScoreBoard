@@ -1,0 +1,27 @@
+.score-board-match {
+  max-width: 600px;
+  width: 100%;
+}
+
+.score-board-match-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid lightgrey;
+  padding: 16px;
+  border-radius: 6px;
+}
+
+.score-board-match-home {
+  flex: 1;
+}
+
+.score-board-match-away {
+  flex: 1;
+  text-align: end;
+}
+
+.score-board-match-result {
+  font-size: 20px;
+  margin: 16px;
+}

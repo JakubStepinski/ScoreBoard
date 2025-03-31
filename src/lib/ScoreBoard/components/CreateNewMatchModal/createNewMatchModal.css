@@ -1,0 +1,17 @@
+.score-board-create-new-match-modal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.score-board-create-new-match-modal-inputs {
+  display: flex;
+  justify-content: space-between;
+  font-size: 16px;
+  margin-bottom: 24px;
+  width: 100%;
+}
+
+.score-board-create-new-match-modal-create {
+  align-self: flex-end;
+}
