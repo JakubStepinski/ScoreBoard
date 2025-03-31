@@ -8,7 +8,7 @@ import { EditMatchScoreModal } from './components/EditMatchScoreModal/EditMatchS
 import { IMatch } from '../scoreBoardStore/types';
 import { SummaryModal } from './components/SummaryModal/SummaryModal';
 
-const ScoreBoardContent = () => {
+export const ScoreBoardContent = () => {
     const currentMatches = useScoreBoardStore((state) => state.currentMatches);
     const addNewMatch = useScoreBoardStore((state) => state.addNewMatch);
     const editCurrentMatch = useScoreBoardStore((state) => state.editCurrentMatch);

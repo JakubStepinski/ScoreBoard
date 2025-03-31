@@ -1,1 +1,2 @@
-export { Button } from './Button'
+export * from './ScoreBoard';
+export * from './scoreBoardStore';

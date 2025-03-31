@@ -3,7 +3,7 @@ import { createScoreBoardStore } from "./scoreBoardStore";
 import { IScoreBoardState } from "./types";
 import { StoreApi, useStore } from "zustand";
 
-interface IScoreBoardStoreProviderProps {
+export interface IScoreBoardStoreProviderProps {
     children: ReactNode;
 }
 
