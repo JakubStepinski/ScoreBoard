@@ -15,7 +15,7 @@ export const Modal = ({ children, testId, isOpen, onClose, title }: IModalProps)
     }
 
     return (
-        <div className="modal-background" data-testId={testId} onClick={onClose}>
+        <div className="modal-background" data-testid={testId} onClick={onClose}>
             <div className="modal-window" onClick={(e) => e.stopPropagation()}>
                 <h2 className="modal-header">
                     {title}

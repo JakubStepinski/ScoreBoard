@@ -16,7 +16,7 @@ const ScoreBoardContent = () => {
 
     return (
         <>
-            <div className="score-board" data-testId="score-board">
+            <div className="score-board" data-testid="score-board">
                 <h1>Score Board</h1>
                 <div className="score-board-actions">
                     <Button onClick={() => setIsCreateJNewMatchModalOpen(true)}>Create new match</Button>
