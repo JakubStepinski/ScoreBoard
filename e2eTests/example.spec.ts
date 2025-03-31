@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { addMatch } from './helpers';
+import { addMatches } from './helpers';
 
 test.describe('Score Board', () => {
   test.beforeEach(async ({ page }) => {
@@ -36,7 +36,7 @@ test.describe('Score Board Actions', () => {
   });
 
   test('edit score of current match', async ({ page }) => {
-    await addMatch(page, 'Barcelona', 'Real Madrid');
+    await addMatches(page, [{ homeTeam: 'Barcelona', awayTeam: 'Real Madrid' }]);
 
     const match = page.getByTestId('score-board-match-0');
     const editMatchButton = match.getByRole('button', { name: 'Edit score' });
@@ -53,7 +53,7 @@ test.describe('Score Board Actions', () => {
   });
 
   test('remove match from current matches', async ({ page }) => {
-    await addMatch(page, 'Barcelona', 'Real Madrid');
+    await addMatches(page, [{ homeTeam: 'Barcelona', awayTeam: 'Real Madrid' }]);
 
     const match = page.getByTestId('score-board-match-0');
     const removeMatchButton = match.getByRole('button', { name: 'Remove match' });
@@ -61,5 +61,27 @@ test.describe('Score Board Actions', () => {
     await removeMatchButton.click();
 
     await expect(page.getByTestId('score-board-match-0')).not.toBeAttached();
+  });
+
+  test('get summary of matches in progress, ordered by total goals respecting latest creation date', async ({ page }) => {
+    await addMatches(page, [
+      { homeTeam: 'Mexico', awayTeam: 'Canada', homeScore: '0', awayScore: '5' },
+      { homeTeam: 'Spain', awayTeam: 'Brazil', homeScore: '10', awayScore: '2' },
+      { homeTeam: 'Germany', awayTeam: 'France', homeScore: '2', awayScore: '2' },
+      { homeTeam: 'Uruguay', awayTeam: 'Italy', homeScore: '6', awayScore: '6' },
+      { homeTeam: 'Argentina', awayTeam: 'Australia', homeScore: '3', awayScore: '1' },
+    ]);
+
+    await page.getByRole('button', { name: 'Generate summary' }).click();
+
+    const summaryList = page.getByTestId('score-board-match-summary-modal').locator('ul > li');
+    const expectedOrder = [
+      'Uruguay 6 - Italy 6',
+      'Spain 10 - Brazil 2',
+      'Mexico 0 - Canada 5',
+      'Argentina 3 - Australia 1',
+      'Germany 2 - France 2',
+    ];
+    await expect(summaryList).toHaveText(expectedOrder);
   });
 });
