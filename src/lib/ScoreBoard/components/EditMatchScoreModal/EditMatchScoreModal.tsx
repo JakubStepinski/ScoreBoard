@@ -22,11 +22,11 @@ export const EditMatchScoreModal = ({ onEditScore, match, onClose, ...props }: E
             <div className="score-board-edit-match-score-modal">
                 <div className="score-board-edit-match-score-modal-inputs">
                     <div>
-                        <span>{match.homeTeam}</span>
+                        <div>{match.homeTeam}</div>
                         <input value={homeTeamScore} placeholder="Home team score" onChange={e => setHomeTeamScore(e.target.value)} />
                     </div>
                     <div>
-                        <span>{match.awayTeam}</span>
+                        <div>{match.awayTeam}</div>
                         <input value={awayTeamScore} placeholder="Away team score" onChange={e => setAwayTeamScore(e.target.value)} />
                     </div>
                 </div>

@@ -13,6 +13,7 @@ describe("CurrentMatch", () => {
         id={0}
         creationDate={new Date().toISOString()}
         onMatchEdit={() => {}}
+        onMatchRemove={() => {}}
       />
     ));
 

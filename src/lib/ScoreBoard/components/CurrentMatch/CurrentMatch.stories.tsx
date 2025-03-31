@@ -14,5 +14,6 @@ export const Default: Story = {
   args: {
     ...mockedMatches[0],
     onMatchEdit: () => {},
+    onMatchRemove: () => {},
   },
 };

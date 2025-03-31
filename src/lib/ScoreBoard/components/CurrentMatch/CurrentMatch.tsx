@@ -4,9 +4,10 @@ import { Button } from "@/lib/Button";
 
 interface CurrentMatchProps extends IMatch {
     onMatchEdit: () => void;
+    onMatchRemove: () => void;
 }
 
-export const CurrentMatch = ({ awayTeam, awayScore, homeTeam, homeScore, id, onMatchEdit }: CurrentMatchProps) => {
+export const CurrentMatch = ({ awayTeam, awayScore, homeTeam, homeScore, id, onMatchEdit, onMatchRemove }: CurrentMatchProps) => {
     return (
         <div className="score-board-match" data-testid={`score-board-match-${id}`}>
             <div className="score-board-match-info">
@@ -18,6 +19,7 @@ export const CurrentMatch = ({ awayTeam, awayScore, homeTeam, homeScore, id, onM
             </div>
             <div className="score-board-match-actions">
                 <Button onClick={onMatchEdit} variant="warning">Edit score</Button>
+                <Button onClick={onMatchRemove} variant="danger">Remove match</Button>
             </div>
         </div>
     );
