@@ -51,4 +51,15 @@ test.describe('Score Board Actions', () => {
 
     await expect(match.getByTestId('score-board-match-result')).toHaveText('2 - 1');
   });
+
+  test('remove match from current matches', async ({ page }) => {
+    await addMatch(page, 'Barcelona', 'Real Madrid');
+
+    const match = page.getByTestId('score-board-match-0');
+    const removeMatchButton = match.getByRole('button', { name: 'Remove match' });
+
+    await removeMatchButton.click();
+
+    await expect(page.getByTestId('score-board-match-0')).not.toBeAttached();
+  });
 });
